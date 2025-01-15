@@ -1,0 +1,5 @@
+switch:
+  steamAppsPath: "C:\\Program Files (x86)\\Steam\\steamapps"
+  steamUserDataPath: "C:\\Program Files (x86)\\Steam\\userdata"
+  steamExecutablePath: "C:\\Program Files (x86)\\Steam\\steam.exe"
+  savedGamesPath: "C:\\Users\\<username>\\Saved Games\EugenSystems\WARNO"
