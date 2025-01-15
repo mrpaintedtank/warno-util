@@ -1,2 +1,29 @@
 # warno-util
  
+## Install 
+
+Download the appropriate version for your system by going to [the releases page](https://github.com/mrpaintedtank/warno-util/releases). Unzip and drop it on the desktop. 
+
+### Shortcut Config
+
+You can create a shortcut to the exe and add the following to the target field to run it without needing to use the CLI. Create a shortcut to it, then open the shortcut and replace the target field with the following
+
+```batch
+C:\Windows\System32\cmd.exe /k "WHEREVER\YOU\PUT\IT\warno-util.exe switch"
+````
+
+Be sure to change WHEREVER\YOU\PUT\IT to the path to the warno-util.exe
+
+### Using it with CMD
+
+You can quickly run it with
+
+```batch
+warno-util.exe switch
+```
+
+There is also help and update functionality. The updater will grab the latest version from the release page of the repo based on your os/arch.
+
+## Development
+
+There is a makefile that handles the usual build/lint/etc tasks. PRs are welcome and will be reviewed eventually. 
