@@ -4,6 +4,10 @@
 
 Download the appropriate version for your system by going to [the releases page](https://github.com/mrpaintedtank/warno-util/releases). Unzip and drop it on the desktop. 
 
+### First Run
+
+On your first run you will need to switch the beta branch in so that you can download whichever branch you don't have installed, then validate the local files. After this you will be able to switch between them without doing anything other than running the switcher.
+
 ### Shortcut Config
 
 You can create a shortcut to the exe and add the following to the target field to run it without needing to use the CLI. Create a shortcut to it, then open the shortcut and replace the target field with the following
