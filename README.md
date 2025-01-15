@@ -14,6 +14,19 @@ C:\Windows\System32\cmd.exe /k "WHEREVER\YOU\PUT\IT\warno-util.exe switch"
 
 Be sure to change WHEREVER\YOU\PUT\IT to the path to the warno-util.exe
 
+### Non Default Install Location For Warno
+
+If you've installed the game in a random location never fear! You can create a config.yml file in the same directory you extracted the binary to and it will pull from that whenever you run the switcher
+
+Update this with the correct values for you and then you're good to go.
+```yaml
+switch:
+  steamAppsPath: "C:\\Program Files (x86)\\Steam\\steamapps"
+  steamUserDataPath: "C:\\Program Files (x86)\\Steam\\userdata"
+  steamExecutablePath: "C:\\Program Files (x86)\\Steam\\steam.exe"
+  savedGamesPath: "C:\\Users\\<username>\\Saved Games\EugenSystems\WARNO"
+```
+
 ### Using it with CMD
 
 You can quickly run it with
