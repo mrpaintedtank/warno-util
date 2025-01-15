@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/test/warno-utils/pkg/update"
 	"github.com/test/warno-utils/pkg/utils"
 	"os"
 	"path/filepath"
@@ -11,6 +12,8 @@ import (
 	urfavealt "github.com/urfave/cli-altsrc/v3"
 	urfave "github.com/urfave/cli/v3"
 )
+
+var version = "dev"
 
 func main() {
 	docs, err := utils.GetUserDocsDir()
@@ -29,6 +32,7 @@ func main() {
 		Name:                  "warno-util",
 		Usage:                 "Utility for WARNO configurations",
 		EnableShellCompletion: true,
+		Version:               version,
 		Commands: []*urfave.Command{
 			{
 				Name:                  "switch",
@@ -39,21 +43,25 @@ func main() {
 						Name:    "steamAppsPath",
 						Usage:   "Path to Steam steamapps directory",
 						Sources: urfavealt.YAML("switch.steamAppsPath", configFiles...),
+						Aliases: []string{"a"},
 					},
 					&urfave.StringFlag{
 						Name:    "steamUserDataPath",
 						Usage:   "Path to Steam userdata directory",
 						Sources: urfavealt.YAML("switch.steamUserDataPath", configFiles...),
+						Aliases: []string{"u"},
 					},
 					&urfave.StringFlag{
 						Name:    "steamExecutablePath",
 						Usage:   "Path to Steam executable steam.exe",
 						Sources: urfavealt.YAML("switch.steamExecutablePath", configFiles...),
+						Aliases: []string{"e"},
 					},
 					&urfave.StringFlag{
-						Name:  "config",
-						Usage: "Path to YAML config file. Will default to looking in the user's Documents directory and the directory of the binary for config.yaml or config.yml",
-						Value: "config.yaml",
+						Name:    "config",
+						Usage:   "Path to YAML config file. Will default to looking in the user's Documents directory and the directory of the binary for config.yaml or config.yml",
+						Value:   "config.yaml",
+						Aliases: []string{"c"},
 					},
 				},
 				Action: func(c *urfave.Context) error {
@@ -76,6 +84,25 @@ func main() {
 					}
 
 					return nil
+				},
+			},
+			{
+				Name:                  "update",
+				Usage:                 "update warnoutil",
+				EnableShellCompletion: true,
+				Flags: []urfave.Flag{
+					&urfave.StringFlag{
+						Name:    "auto-approve",
+						Aliases: []string{"y"},
+					},
+				},
+				Action: func(c *urfave.Context) error {
+					if err := c.Err(); err != nil {
+						return err
+					}
+
+					u := update.Updater{Version: version}
+					return u.RunUpdate()
 				},
 			},
 		},
