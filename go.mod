@@ -3,6 +3,7 @@ module github.com/test/warno-utils
 go 1.23.4
 
 require (
+	github.com/Masterminds/semver/v3 v3.3.1
 	github.com/urfave/cli-altsrc/v3 v3.0.0-alpha2
 	github.com/urfave/cli/v3 v3.0.0-alpha4
 )
