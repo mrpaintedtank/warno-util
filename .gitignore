@@ -22,3 +22,5 @@ go.work
 .idea/warno-util.iml
 .idea/vcs.xml
 .idea/modules.xml
+
+dist/**
