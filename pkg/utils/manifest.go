@@ -12,10 +12,10 @@ func ReadManifest(profile string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	if bytes.Contains(file, []byte("BetaKey")) && bytes.Contains(file, []byte("WARNO")) && bytes.Contains(file, []byte("full_vip")) {
+	if bytes.Contains(file, []byte("BetaKey")) && bytes.Contains(file, []byte(`"BetaKey"		"full_vip"`)) {
 		return true, nil
 	}
-	if bytes.Contains(file, []byte("BetaKey")) && bytes.Contains(file, []byte("WARNO")) && bytes.Contains(file, []byte("public")) {
+	if bytes.Contains(file, []byte("BetaKey")) && bytes.Contains(file, []byte(`"BetaKey"		"public"`)) {
 		return false, nil
 	}
 	return false, fmt.Errorf("manifest file does not contain expected values")
