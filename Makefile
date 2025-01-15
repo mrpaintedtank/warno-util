@@ -5,7 +5,7 @@ GO_VERSION := 1.23.4
 GOPATH ?= $(shell go env GOPATH)
 
 # build vars
-VERSION ?= dev
+VERSION ?= 0.0.1
 BINARY_NAME := warno-util
 MAIN_FILE := cmd/warno-util/main.go
 OUTPUT_DIR := bin
@@ -24,7 +24,16 @@ help:
 
 .PHONY: all
 ## all: clean, tidy, format, lint and build the application
-all: clean tidy fmt lint release
+all: clean tidy fmt lint build
+
+.PHONY: build
+# build: build warno-util for local use
+build:
+	@echo "Building $(BINARY_NAME) for Windows..."
+	set GOOS=$(GOOS_WINDOWS)
+	set GOARCH=$(GOARCH_WINDOWS)
+	go build -ldflags "-X main.version=$(VERSION)" -o $(OUTPUT_DIR)/$(BINARY_NAME).exe $(MAIN_FILE)
+	@echo "Build completed: $(OUTPUT_DIR)/$(BINARY_NAME).exe"
 
 .PHONY: clean
 ## clean: remove build artifacts
@@ -63,15 +72,3 @@ GOLANGCI_VERSION := v1.63.4
 install_lint:
 	@echo "Checking if golangci-lint is installed..."
 	@which golangci-lint || (echo "Installing golangci-lint..." && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GOPATH)/bin $(GOLANGCI_VERSION))
-
-.PHONY: release
-## release: run goreleaser to create a new local release
-release: install_goreleaser
-	@echo "Running goreleaser..."
-	@goreleaser release --snapshot --clean --config .goreleaser.yml
-
-.PHONY: install_goreleaser
-## install_goreleaser: install goreleaser if not present
-install_goreleaser:
-	@echo "Checking if goreleaser is installed..."
-	@which goreleaser || (echo "Installing goreleaser..." && go install github.com/goreleaser/goreleaser/v2@latest)
